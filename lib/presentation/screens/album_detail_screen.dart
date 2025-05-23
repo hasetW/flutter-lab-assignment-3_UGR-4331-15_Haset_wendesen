@@ -41,7 +41,19 @@ class AlbumDetailScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final photo = albumPhotos[index];
                   return ListTile(
-                    leading: Image.network(photo.thumbnailUrl),
+                    leading: Image.network(
+                      photo.thumbnailUrl,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(
+                          Icons.image_not_supported,
+                          size: 40,
+                          color: Colors.grey,
+                        );
+                      },
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
                     title: Text(photo.title),
                   );
                 },
